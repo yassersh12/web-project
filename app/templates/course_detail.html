@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-10">
+    <h1 class="text-4xl font-extrabold mb-8 text-indigo-700 text-center">{{ course.name }}</h1>
+    <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">Course Code: <span class="text-indigo-500">{{ course.code }}</span></h2>
+        <p class="mb-4"><strong class="text-gray-700">Description:</strong> <span class="text-gray-600">{{ course.description }}</span></p>
+        <p class="mb-4"><strong class="text-gray-700">Instructor:</strong> <span class="text-gray-600">{{ course.instructor }}</span></p>
+        <p class="mb-4"><strong class="text-gray-700">Capacity:</strong> <span class="text-gray-600">{{ course.capacity }}</span></p>
+
+        <p class="mb-4"><strong class="text-gray-700">Prerequisites:</strong>
+            {% if course.prerequisites.all %}
+            <ul class="list-disc list-inside ml-6 text-gray-600">
+                {% for prerequisite in course.prerequisites.all %}
+                <li>{{ prerequisite.name }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <span class="text-gray-600">None</span>
+            {% endif %}
+        </p>
+
+        <p class="mb-4"><strong class="text-gray-700">Schedule:</strong> <span class="text-gray-600">{{ course.schedule.days }} from {{ course.schedule.start_time }} to {{ course.schedule.end_time }}</span></p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  background-image {
+    /* Apply blur filter to the header background image */
+    filter: blur(2px);  /* Adjust blur radius as needed */
+  }
+</style>
+  <header class="bg-gray-500 py-24" style="background-image: url('https://www.ppu.edu/p/sites/default/files/styles/slider/public/ppu-1684048564-B%20-%20new%20building.jpg?itok=RAVVA2iQ'); background-size: cover; background-position: center;">
+    <div class="container mx-auto text-center py-20">
+      <form method="get" action="" class="inline-block">
+        <div class="flex items-center">
+          <input type="text" name="q" placeholder="Search by course code, name, or instructor" class="px-2 py-2 w-80 border border-black rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <button type="submit" class="px-4 py-2 bg-black text-white border border-black rounded-r-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">Search</button>
+        </div>
+      </form>
+    </div>
+
+  </header>
+
+ 
+  <main class="container mx-auto py-8">
+    <h1 class="text-4xl font-bold my-6 text-center">Courses</h1>
+    <ul class="flex flex-wrap -mx-4">
+      {% for course in courses %}
+        <li class="w-1/2 px-4 mb-4">
+          <div class="p-4 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
+            <a href="{% url 'course_detail' course.code %}" class="text-lg font-semibold text-blue-600 hover:text-blue-800">{{ course.name }}</a> - <span class="text-gray-700">{{ course.instructor }}</span>
+            <p class="mt-2 text-gray-600">{{ course.description }}</p>
+            <a href="/enroll/{{course.id}}/" class="bg-yellow-800 text-white px-3 py-2 mt-3 rounded">Enroll Now</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </main>
+
+
+ 
+{% endblock %}
+
+
+
+
+

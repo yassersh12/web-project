@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="flex justify-center items-center min-h-screen bg-gray-100 py-6">
+        <div class="w-full max-w-lg">
+            <form method="post" class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+                <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Add Course</h1>
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="code" class="block text-gray-700 text-sm font-bold mb-2">Code:</label>
+                    <input type="text" id="code" name="code" required
+                           class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                    <input type="text" id="name" name="name" required
+                           class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+                <div class="mb-4">
+                    <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+                    <textarea id="description" name="description" required
+                              class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="instructor" class="block text-gray-700 text-sm font-bold mb-2">Instructor:</label>
+                    <input type="text" id="instructor" name="instructor" required
+                           class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+                <div class="mb-4">
+                    <label for="capacity" class="block text-gray-700 text-sm font-bold mb-2">Capacity:</label>
+                    <input type="number" id="capacity" name="capacity" required
+                           class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+                <div class="mb-4">
+                    <label for="schedule" class="block text-gray-700 text-sm font-bold mb-2">Schedule:</label>
+                    <select id="schedule" name="schedule" required
+                            class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        {% for schedule in schedules %}
+                            <option value="{{ schedule.id }}">
+                              {{ schedule.days }} - {{ schedule.start_time }} to {{ schedule.end_time }}
+                          </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-6 text-center">
+                    <button type="submit"
+                            class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-300">Add Course
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
